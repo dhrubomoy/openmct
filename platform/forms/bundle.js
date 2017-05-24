@@ -28,6 +28,7 @@ define([
     "./src/controllers/CompositeController",
     "./src/controllers/ColorController",
     "./src/controllers/DialogButtonController",
+    "text!./res/templates/controls/autocomplete.html",
     "text!./res/templates/controls/checkbox.html",
     "text!./res/templates/controls/datetime.html",
     "text!./res/templates/controls/select.html",
@@ -48,6 +49,7 @@ define([
     CompositeController,
     ColorController,
     DialogButtonController,
+    autocompleteTemplate,
     checkboxTemplate,
     datetimeTemplate,
     selectTemplate,
@@ -85,6 +87,10 @@ define([
                 }
             ],
             "controls": [
+                {
+                    "key": "autocomplete",
+                    "template": autocompleteTemplate
+                },
                 {
                     "key": "checkbox",
                     "template": checkboxTemplate
