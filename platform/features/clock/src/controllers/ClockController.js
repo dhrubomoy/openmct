@@ -20,8 +20,10 @@
  * at runtime from the About dialog for additional information.
  *****************************************************************************/
 
-define(
-    ['moment'],
+define([
+    'moment',
+    'moment-timezone'
+    ],
     function (moment) {
 
         /**
@@ -37,10 +39,13 @@ define(
             var lastTimestamp,
                 unlisten,
                 timeFormat,
+                zoneName,
                 self = this;
 
             function update() {
-                var m = moment.utc(lastTimestamp);
+                var m = zoneName ?
+                moment.utc(lastTimestamp).tz(zoneName) : moment.utc(lastTimestamp);
+                self.zoneAbbr = zoneName ? m.zoneAbbr() : "UTC";
                 self.textValue = timeFormat && m.format(timeFormat);
                 self.ampmValue = m.format("A"); // Just the AM or PM part
             }
@@ -50,21 +55,21 @@ define(
                 update();
             }
 
-            function updateFormat(clockFormat) {
+            function updateModel(model) {
                 var baseFormat;
+                if (model !== undefined) {
+                    baseFormat = model.clockFormat[0];
 
-                if (clockFormat !== undefined) {
-                    baseFormat = clockFormat[0];
-
-                    self.use24 = clockFormat[1] === 'clock24';
+                    self.use24 = model.clockFormat[1] === 'clock24';
                     timeFormat = self.use24 ?
                             baseFormat.replace('hh', "HH") : baseFormat;
-
-                    update();
+                    zoneName = model.timezone;
                 }
+                update();
             }
-            // Pull in the clock format from the domain object model
-            $scope.$watch('model.clockFormat', updateFormat);
+
+            // Pull in the model (clockFormat and timezone) from the domain object model
+            $scope.$watch('model', updateModel);
 
             // Listen for clock ticks ... and stop listening on destroy
             unlisten = tickerService.listen(tick);
@@ -76,7 +81,7 @@ define(
          * @returns {string}
          */
         ClockController.prototype.zone = function () {
-            return "UTC";
+            return this.zoneAbbr;
         };
 
         /**

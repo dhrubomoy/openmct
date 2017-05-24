@@ -200,13 +200,26 @@ define([
                                     "cssClass": "l-inline"
                                 }
                             ]
+                        },
+                        {
+                            "key": "timezone",
+                            "name": "Timezone",
+                            "control": "select",
+                            "options": require('moment-timezone').tz.names().map(
+                                           function(zoneName) {
+                                               return {
+                                                   "name": zoneName,
+                                                   "value": zoneName
+                                                }
+                                            })
                         }
                     ],
                     "model": {
                         "clockFormat": [
                             "YYYY/MM/DD hh:mm:ss",
                             "clock12"
-                        ]
+                        ],
+                        "timezone": "UTC"
                     }
                 },
                 {
