@@ -24,6 +24,7 @@ define([
     "./src/MCTForm",
     "./src/MCTToolbar",
     "./src/MCTControl",
+    "./src/controllers/AutocompleteController",
     "./src/controllers/DateTimeController",
     "./src/controllers/CompositeController",
     "./src/controllers/ColorController",
@@ -45,6 +46,7 @@ define([
     MCTForm,
     MCTToolbar,
     MCTControl,
+    AutocompleteController,
     DateTimeController,
     CompositeController,
     ColorController,
@@ -137,6 +139,13 @@ define([
                 }
             ],
             "controllers": [
+                {
+                    "key": "AutocompleteController",
+                    "implementation": AutocompleteController,
+                    "depends": [
+                        "$scope"
+                    ]
+                },
                 {
                     "key": "DateTimeController",
                     "implementation": DateTimeController,
