@@ -24,6 +24,7 @@ define([
     "./src/MCTForm",
     "./src/MCTToolbar",
     "./src/MCTControl",
+    "./src/AutocompleteDirective",
     "./src/controllers/AutocompleteController",
     "./src/controllers/DateTimeController",
     "./src/controllers/CompositeController",
@@ -46,6 +47,7 @@ define([
     MCTForm,
     MCTToolbar,
     MCTControl,
+    AutocompleteDirective,
     AutocompleteController,
     DateTimeController,
     CompositeController,
@@ -85,6 +87,13 @@ define([
                     "depends": [
                         "templateLinker",
                         "controls[]"
+                    ]
+                },
+                {
+                    "key": "autocomplete",
+                    "implementation": AutocompleteDirective,
+                    "depends": [
+                        "templateLinker"
                     ]
                 }
             ],

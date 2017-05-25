@@ -25,22 +25,31 @@ define(
     function () {
 
         /**
-         * Controller for the `autocomplete` form control.
-         * 
-         *
-         * @memberof platform/forms
+         * The mct-control will dynamically include the control
+         * for a form element based on a symbolic key. Individual
+         * controls are defined under the extension category
+         * `controls`; this allows plug-ins to introduce new form
+         * control types while still making use of the form
+         * generator to ensure an overall consistent form style.
          * @constructor
+         * @memberof platform/forms
          */
-        function AutocompleteController($scope) {
-
-            function updateModel(value) {
-                
-            }
-
-            $scope.$watch("ngModel[field]", updateModel);
+        function AutocompleteDirective($timeout) {
+            return function(scope, iElement, iAttrs) {
+                console.log("scope", scope);
+                console.log("iElement", iElement);
+                console.log("iAttrs", iAttrs);
+                // iElement.autocomplete({
+                //     source: scope[iAttrs.uiItems],
+                //     select: function() {
+                //         $timeout(function() {
+                //             iElement.trigger('input');
+                //         }, 0);
+                //     }
+                // });
+            };
         }
 
-        return AutocompleteController;
-
+        return AutocompleteDirective;
     }
 );

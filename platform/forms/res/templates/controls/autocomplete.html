@@ -33,12 +33,13 @@
 <!--<input list="testList-{{ngModel[field]}}"
        ng-model="ngModel[field]" 
        ng-required="ngRequired"
-       name="mctControl" 
-       ng-click="console.log('blah')"/>
+       name="mctControl" />
 <datalist id="testList-{{ngModel[field]}}">
     <option ng-repeat="opt in options" value="{{opt.name}}">
 </datalist>-->
 
 <div ng-controller="AutocompleteController">
-    {{names}}
+     <input autocomplete
+            ui-items="options"
+            ng-model="ngModel[field]">
 </div>
