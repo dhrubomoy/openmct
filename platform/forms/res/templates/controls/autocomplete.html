@@ -20,25 +20,17 @@
  at runtime from the About dialog for additional information.
 -->
 
-<!--<div class='form-control select'>
-    <select
-            ng-model="ngModel[field]"
-            ng-options="opt.value as opt.name for opt in options"
-            ng-required="ngRequired"
-            name="mctControl">
-        <option value="" ng-show="!ngModel[field]">- Select One -</option>
-    </select>
-</div>-->
-
-<!--<input list="testList-{{ngModel[field]}}"
-       ng-model="ngModel[field]" 
-       ng-required="ngRequired"
-       name="mctControl" 
-       ng-click="console.log('blah')"/>
-<datalist id="testList-{{ngModel[field]}}">
-    <option ng-repeat="opt in options" value="{{opt.name}}">
-</datalist>-->
-
-<div ng-controller="AutocompleteController">
-    {{names}}
+<div ng-controller="AutocompleteController">  
+    <input type="text"
+           ng-model="ngModel[field]"
+           ng-change="complete(ngModel[field])"
+           ng-keydown="keyDown($event)"
+           ng-click="ngModel[field] = null"/>  
+    <ul ng-model="hidethis"
+        ng-hide="hidethis">  
+        <li ng-repeat="opt in filteredOptions"
+            ng-click="fillTextbox(opt)">
+            {{opt}}
+        </li>
+    </ul>  
 </div>

@@ -205,13 +205,7 @@ define([
                             "key": "timezone",
                             "name": "Timezone",
                             "control": "autocomplete",
-                            "options": require('moment-timezone').tz.names().map(
-                                           function(zoneName) {
-                                               return {
-                                                   "name": zoneName,
-                                                   "value": zoneName
-                                                }
-                                            })
+                            "options": require('moment-timezone').tz.names()
                         }
                     ],
                     "model": {

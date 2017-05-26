@@ -34,13 +34,32 @@ define(
          * @constructor
          */
         function AutocompleteController($scope) {
-            $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert","edouard", "benoit", "guillaume", "nicolas", "joseph"];
 
-            function updateModel(value) {
-                console.log(value);
+            $scope.keyDown = function($event) {
+                if($event.key == "ArrowDown") {
+                    console.log($event);
+                }
             }
 
-            $scope.$watch("ngModel[field]", updateModel);
+            $scope.complete = function(string){ 
+                $scope.hidethis = false;  
+                var output = [];
+                angular.forEach($scope.options, function(option) {
+                    // Show only 10 for now.
+                    if(output.length < 10) {
+                        if(option.toLowerCase().indexOf(string.toLowerCase()) >= 0) {  
+                            output.push(option);  
+                        }                        
+                    }
+                });  
+                $scope.filteredOptions = output;
+            }
+            
+            $scope.fillTextbox = function(string) { 
+                // Hard coded!!
+                $scope.ngModel[4] = string;
+                $scope.hidethis = true;  
+            }
         }
 
         return AutocompleteController;
