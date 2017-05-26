@@ -297,6 +297,19 @@ textarea.lg { position: relative; height: 300px; }
     }
 }
 
+/******************************************************** AUTOCOMPLETE */
+.autocomplete {
+    input {
+        width: 70%;
+    }
+    ul {
+        width: 70%;
+        max-height: 170px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
 /******************************************************** OBJECT-HEADER */
 .object-header {
     font-size: 1em;

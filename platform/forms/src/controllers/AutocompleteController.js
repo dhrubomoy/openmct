@@ -42,23 +42,26 @@ define(
             }
 
             $scope.complete = function(string){ 
-                $scope.hidethis = false;  
+                $scope.hideOptions = false;  
                 var output = [];
                 angular.forEach($scope.options, function(option) {
-                    // Show only 10 for now.
-                    if(output.length < 10) {
-                        if(option.toLowerCase().indexOf(string.toLowerCase()) >= 0) {  
-                            output.push(option);  
-                        }                        
+                    if(option.toLowerCase().indexOf(string.toLowerCase()) >= 0) {  
+                        output.push(option);  
                     }
                 });  
                 $scope.filteredOptions = output;
             }
+
+            $scope.inputClicked = function($event) {
+                $event.target.select();
+                $scope.hideOptions = true;
+                //$event.target.select();
+            }
             
-            $scope.fillTextbox = function(string) { 
+            $scope.fillTextbox = function(string) {
+                $scope.hideOptions = true;
                 // Hard coded!!
                 $scope.ngModel[4] = string;
-                $scope.hidethis = true;  
             }
         }
 

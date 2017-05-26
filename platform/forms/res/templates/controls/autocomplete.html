@@ -20,16 +20,17 @@
  at runtime from the About dialog for additional information.
 -->
 
-<div ng-controller="AutocompleteController">  
+<div ng-controller="AutocompleteController"
+     class='form-control autocomplete' >  
     <input type="text"
            ng-model="ngModel[field]"
            ng-change="complete(ngModel[field])"
-           ng-keydown="keyDown($event)"
-           ng-click="ngModel[field] = null"/>  
-    <ul ng-model="hidethis"
-        ng-hide="hidethis">  
+           ng-click="inputClicked($event)"
+           ng-keydown="keyDown($event)"/>  
+    <ul ng-model="hideOptions"
+        ng-hide="hideOptions">  
         <li ng-repeat="opt in filteredOptions"
-            ng-click="fillTextbox(opt)">
+            ng-click="fillInput(opt)">
             {{opt}}
         </li>
     </ul>  
