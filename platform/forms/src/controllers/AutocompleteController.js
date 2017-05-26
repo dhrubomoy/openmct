@@ -25,43 +25,84 @@ define(
     function () {
 
         /**
-         * Controller for the `datetime` form control.
-         * This is a composite control; it includes multiple
-         * input fields but outputs a single timestamp (in
-         * milliseconds since start of 1970) to the ngModel.
+         * Controller for the `autocomplete` form control.
          *
          * @memberof platform/forms
          * @constructor
          */
         function AutocompleteController($scope) {
 
+            var key = {
+                down: "ArrowDown",
+                up: "ArrowUp",
+                enter: "Enter"
+            }
+
+            function decrementOptionIndex() {
+                if($scope.optionIndex === 0) {
+                    $scope.optionIndex = $scope.filteredOptions.length+1;
+                }
+                $scope.optionIndex--;
+            }
+
+            function incrementOptionIndex() {
+                if($scope.optionIndex === $scope.filteredOptions.length) {
+                    $scope.optionIndex = -1;
+                }
+                $scope.optionIndex++;
+            }
+
+            function fillInputWithString(string) {
+                $scope.hideOptions = true;
+                // Hard coded!!
+                $scope.ngModel[4] = string;
+            }
+
             $scope.keyDown = function($event) {
-                if($event.key == "ArrowDown") {
-                    console.log($event);
+                var eventKey = $event.key;
+                if($scope.filteredOptions) {
+                    switch(eventKey) {
+                        case key.down:
+                            incrementOptionIndex();
+                            break;
+                        case key.up:
+                            decrementOptionIndex();
+                            break;
+                        case key.enter:
+                            console.log($scope.filteredOptions[$scope.optionIndex].name);
+                            fillInputWithString($scope.filteredOptions[$scope.optionIndex].name);
+                    }
                 }
             }
 
-            $scope.complete = function(string){ 
-                $scope.hideOptions = false;  
+            $scope.filterOptions = function(string) {
+                $scope.hideOptions = false; 
                 var output = [];
                 angular.forEach($scope.options, function(option) {
                     if(option.toLowerCase().indexOf(string.toLowerCase()) >= 0) {  
                         output.push(option);  
                     }
-                });  
-                $scope.filteredOptions = output;
+                });
+                $scope.filteredOptions = output.map(function(elem, index) {
+                    return {
+                        optionId: index,
+                        name: elem
+                    }
+                });
             }
 
             $scope.inputClicked = function($event) {
                 $event.target.select();
-                $scope.hideOptions = true;
-                //$event.target.select();
+                $scope.hideOptions = false;
+                $scope.optionIndex = 0;
             }
             
-            $scope.fillTextbox = function(string) {
-                $scope.hideOptions = true;
-                // Hard coded!!
-                $scope.ngModel[4] = string;
+            $scope.fillInput = function(string) {
+                fillInputWithString(string);
+            }
+
+            $scope.optionMouseover = function(optionId) {
+                $scope.optionIndex = optionId;
             }
         }
 

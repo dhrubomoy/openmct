@@ -300,13 +300,29 @@ textarea.lg { position: relative; height: 300px; }
 /******************************************************** AUTOCOMPLETE */
 .autocomplete {
     input {
-        width: 70%;
+        width: 69.5%;
+        padding: 10px 0px 10px 7px;
     }
-    ul {
-        width: 70%;
-        max-height: 170px;
-        overflow-y: scroll;
-        overflow-x: hidden;
+    .autocompleteOptions {
+        ul {
+            border: 2px solid #666666;
+            border-radius: 5px;
+            width: 69%;
+            max-height: 170px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        li {
+            border: 1px solid #666666;
+            padding: 8px 0px 8px 5px;
+            .optionText {
+                cursor: pointer;
+            }
+        }
+        .optionPreSelected {
+            background-color: #006080;
+            color: #EFFFFF;
+        }
     }
 }
 

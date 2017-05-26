@@ -24,14 +24,19 @@
      class='form-control autocomplete' >  
     <input type="text"
            ng-model="ngModel[field]"
-           ng-change="complete(ngModel[field])"
+           ng-change="filterOptions(ngModel[field])"
            ng-click="inputClicked($event)"
-           ng-keydown="keyDown($event)"/>  
-    <ul ng-model="hideOptions"
-        ng-hide="hideOptions">  
-        <li ng-repeat="opt in filteredOptions"
-            ng-click="fillInput(opt)">
-            {{opt}}
-        </li>
-    </ul>  
+           ng-keydown="keyDown($event)"/>
+    <div class="autocompleteOptions">
+        <ul ng-model="hideOptions"
+            ng-hide="hideOptions">  
+            <li ng-repeat="opt in filteredOptions"
+                onload="hideOption = true"
+                ng-click="fillInput(opt.name)"
+                ng-mouseover="optionMouseover(opt.optionId)"
+                ng-class="optionIndex === opt.optionId ? 'optionPreSelected' : ''">
+                <span class="optionText">{{opt.name}}</span>
+            </li>
+        </ul>  
+    </div>
 </div>
