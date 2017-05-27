@@ -300,13 +300,19 @@ textarea.lg { position: relative; height: 300px; }
 /******************************************************** AUTOCOMPLETE */
 .autocomplete {
     input {
-        width: 70%;
+        width: 226px;
         padding: 5px 0px 5px 7px;
+    }
+    .icon-arrow-down {
+        position: absolute;
+        top: 7px;
+        left: 209px;
+        font-size: 12px;
     }
     .autocompleteOptions {
         border: 1px solid #666666;
         border-radius: 5px;
-        width: 70%;
+        width: 224px;
         max-height: 170px;
         overflow-y: auto;
         overflow-x: hidden;
