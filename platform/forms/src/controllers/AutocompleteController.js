@@ -40,13 +40,13 @@ define(
 
             function decrementOptionIndex() {
                 if($scope.optionIndex === 0) {
-                    $scope.optionIndex = $scope.filteredOptions.length+1;
+                    $scope.optionIndex = $scope.filteredOptions.length;
                 }
                 $scope.optionIndex--;
             }
 
             function incrementOptionIndex() {
-                if($scope.optionIndex === $scope.filteredOptions.length) {
+                if($scope.optionIndex === $scope.filteredOptions.length-1) {
                     $scope.optionIndex = -1;
                 }
                 $scope.optionIndex++;
@@ -59,8 +59,8 @@ define(
             }
 
             $scope.keyDown = function($event) {
-                var eventKey = $event.key;
                 if($scope.filteredOptions) {
+                    var eventKey = $event.key;
                     switch(eventKey) {
                         case key.down:
                             incrementOptionIndex();
@@ -69,31 +69,28 @@ define(
                             decrementOptionIndex();
                             break;
                         case key.enter:
-                            console.log($scope.filteredOptions[$scope.optionIndex].name);
                             fillInputWithString($scope.filteredOptions[$scope.optionIndex].name);
                     }
                 }
             }
 
             $scope.filterOptions = function(string) {
-                $scope.hideOptions = false; 
-                var output = [];
-                angular.forEach($scope.options, function(option) {
-                    if(option.toLowerCase().indexOf(string.toLowerCase()) >= 0) {  
-                        output.push(option);  
-                    }
-                });
-                $scope.filteredOptions = output.map(function(elem, index) {
+                $scope.hideOptions = false;
+                $scope.filteredOptions = $scope.options.filter(function(option) {
+                    return option.toLowerCase().indexOf(string.toLowerCase()) >= 0;
+                }).map(function(option, index) {
                     return {
                         optionId: index,
-                        name: elem
+                        name: option
                     }
                 });
             }
 
             $scope.inputClicked = function($event) {
-                $event.target.select();
+                var target = $event.target;
+                target.select();
                 $scope.hideOptions = false;
+                $scope.filterOptions(target.value);
                 $scope.optionIndex = 0;
             }
             

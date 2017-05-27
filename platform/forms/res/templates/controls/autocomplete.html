@@ -27,11 +27,12 @@
            ng-change="filterOptions(ngModel[field])"
            ng-click="inputClicked($event)"
            ng-keydown="keyDown($event)"/>
-    <div class="autocompleteOptions">
-        <ul ng-model="hideOptions"
-            ng-hide="hideOptions">  
+    <div class="autocompleteOptions"
+         onload="hideOptions = false"
+         ng-model="hideOptions"
+         ng-hide="hideOptions">
+        <ul>  
             <li ng-repeat="opt in filteredOptions"
-                onload="hideOption = true"
                 ng-click="fillInput(opt.name)"
                 ng-mouseover="optionMouseover(opt.optionId)"
                 ng-class="optionIndex === opt.optionId ? 'optionPreSelected' : ''">
