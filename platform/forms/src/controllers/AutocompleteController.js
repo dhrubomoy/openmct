@@ -33,9 +33,9 @@ define(
         function AutocompleteController($scope) {
 
             var key = {
-                down: "ArrowDown",
-                up: "ArrowUp",
-                enter: "Enter"
+                down: 40,
+                up: 38,
+                enter: 13
             }
 
             if($scope.options[0].name) {
@@ -74,8 +74,8 @@ define(
 
             $scope.keyDown = function($event) {
                 if($scope.filteredOptions) {
-                    var eventKey = $event.key;
-                    switch(eventKey) {
+                    var keyCode = $event.keyCode;
+                    switch(keyCode) {
                         case key.down:
                             incrementOptionIndex();
                             fillInputWithIndexedOption();
