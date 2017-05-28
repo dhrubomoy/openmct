@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 define([
+    "moment-timezone",
     "./src/indicators/ClockIndicator",
     "./src/services/TickerService",
     "./src/controllers/ClockController",
@@ -32,6 +33,7 @@ define([
     "text!./res/templates/timer.html",
     'legacyRegistry'
 ], function (
+    MomentTimezone,
     ClockIndicator,
     TickerService,
     ClockController,
@@ -205,7 +207,7 @@ define([
                             "key": "timezone",
                             "name": "Timezone",
                             "control": "autocomplete",
-                            "options": require('moment-timezone').tz.names()
+                            "options": MomentTimezone.tz.names()
                         }
                     ],
                     "model": {

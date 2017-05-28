@@ -38,6 +38,16 @@ define(
                 enter: "Enter"
             }
 
+            if($scope.options[0].name) {
+                // If "options" include name, value pair
+                $scope.optionNames = $scope.options.map(function(opt) {
+                    return opt.name;
+                })
+            } else {
+                // If options is only an array of string.
+                $scope.optionNames = $scope.options;
+            }
+
             function decrementOptionIndex() {
                 if($scope.optionIndex === 0) {
                     $scope.optionIndex = $scope.filteredOptions.length;
@@ -76,14 +86,16 @@ define(
                             fillInputWithIndexedOption();
                             break;
                         case key.enter:
-                            fillInputWithString($scope.filteredOptions[$scope.optionIndex].name);
+                            if($scope.filteredOptions[$scope.optionIndex]) {
+                                fillInputWithString($scope.filteredOptions[$scope.optionIndex].name);
+                            }
                     }
                 }
             }
 
             $scope.filterOptions = function(string) {
                 $scope.hideOptions = false;
-                $scope.filteredOptions = $scope.options.filter(function(option) {
+                $scope.filteredOptions = $scope.optionNames.filter(function(option) {
                     return option.toLowerCase().indexOf(string.toLowerCase()) >= 0;
                 }).map(function(option, index) {
                     return {

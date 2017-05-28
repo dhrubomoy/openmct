@@ -24,7 +24,10 @@ define([
     'moment',
     'moment-timezone'
     ],
-    function (moment) {
+    function (
+        moment,
+        momentTimezone
+    ) {
 
         /**
          * Controller for views of a Clock domain object.
@@ -44,7 +47,7 @@ define([
 
             function update() {
                 var m = zoneName ?
-                moment.utc(lastTimestamp).tz(zoneName) : moment.utc(lastTimestamp);
+                    moment.utc(lastTimestamp).tz(zoneName) : moment.utc(lastTimestamp);
                 self.zoneAbbr = zoneName ? m.zoneAbbr() : "UTC";
                 self.textValue = timeFormat && m.format(timeFormat);
                 self.ampmValue = m.format("A"); // Just the AM or PM part
@@ -63,7 +66,9 @@ define([
                     self.use24 = model.clockFormat[1] === 'clock24';
                     timeFormat = self.use24 ?
                             baseFormat.replace('hh', "HH") : baseFormat;
-                    zoneName = model.timezone;
+                    // If wrong timezone is provided, the UTC will be used
+                    zoneName = momentTimezone.tz.names().includes(model.timezone) ? 
+                        model.timezone : "UTC";
                 }
                 update();
             }
