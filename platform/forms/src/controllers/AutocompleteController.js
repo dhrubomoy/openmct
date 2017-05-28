@@ -58,15 +58,22 @@ define(
                 $scope.ngModel[4] = string;
             }
 
+            function fillInputWithIndexedOption() {
+                $scope.ngModel[4] = $scope.filteredOptions[$scope.optionIndex].name;
+            }
+
             $scope.keyDown = function($event) {
                 if($scope.filteredOptions) {
                     var eventKey = $event.key;
                     switch(eventKey) {
                         case key.down:
                             incrementOptionIndex();
+                            fillInputWithIndexedOption();
                             break;
                         case key.up:
+                            $event.preventDefault();
                             decrementOptionIndex();
+                            fillInputWithIndexedOption();
                             break;
                         case key.enter:
                             fillInputWithString($scope.filteredOptions[$scope.optionIndex].name);
