@@ -81,7 +81,7 @@ define(
                             fillInputWithIndexedOption();
                             break;
                         case key.up:
-                            $event.preventDefault();
+                            $event.preventDefault();    // Prevents cursor jumping back and forth
                             decrementOptionIndex();
                             fillInputWithIndexedOption();
                             break;
