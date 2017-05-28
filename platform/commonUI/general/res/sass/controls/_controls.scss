@@ -310,22 +310,22 @@ textarea.lg { position: relative; height: 300px; }
         font-size: 10px;
     }
     .autocompleteOptions {
-        border: 1px solid #666666;
+        border: 1px solid $colorFormLines;
         border-radius: 5px;
         width: 224px;
         max-height: 170px;
         overflow-y: auto;
         overflow-x: hidden;
         li {
-            border: 1px solid #666666;
+            border: 1px solid $colorFormLines;
             padding: 8px 0px 8px 5px;
             .optionText {
                 cursor: pointer;
             }
         }
         .optionPreSelected {
-            background-color: #006080;
-            color: #EFFFFF;
+            background-color: $colorInspectorSectionHeaderBg;
+            color: $colorInspectorSectionHeaderFg;
         }
     }
 }
